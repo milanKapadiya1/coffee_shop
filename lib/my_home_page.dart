@@ -12,9 +12,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        // body: Center(
-        //   child: Image.asset('assets/images/onboarding.png'),
-        // ),
+        body: Center(
+          child: Text('hello asswipe'),
+        ),
       ),
     );
   }
