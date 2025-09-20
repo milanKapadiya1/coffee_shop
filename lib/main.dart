@@ -1,29 +1,44 @@
-import 'package:coffeeshop/my_home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+class OnboardingScreen extends StatelessWidget {
+  const OnboardingScreen({super.key});
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: Size(375, 812),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          fontFamily: 'Sora',
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: SingleChildScrollView( // in case text/image is large
+          child: Stack(
+            clipBehavior: Clip.none, // 🔑 allow overflow outside
+            children: [
+              // Background Image (takes its own natural height)
+              Image.asset(
+                'assets/images/onboarding.png',
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+
+              // Text at the bottom edge (overlaps image + below)
+              Positioned(
+                bottom: -40, // half text on image, half outside
+                left: 20,
+                right: 20,
+                child: Text(
+                  'Fall in Love with Coffee in Blissful Delight!',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontFamily: 'sora',
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-        home: const MyHomePage(),
       ),
     );
   }
 }
-
