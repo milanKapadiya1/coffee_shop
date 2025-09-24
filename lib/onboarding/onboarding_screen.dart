@@ -13,16 +13,13 @@ class OnboardingScreen extends StatelessWidget {
         body: Column(
           children: [
             Stack(
-              clipBehavior: Clip.none, // 🔑 allow overflow outside
+              clipBehavior: Clip.none, //  overflow outside
               children: [
-                // Background Image (takes its own natural height)
                 Image.asset(
                   'assets/images/onboarding.png',
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
-
-                // Text at the bottom edge (overlaps image + below)
                 Positioned(
                   bottom: -40, // half text on image, half outside
                   left: 20,
@@ -30,9 +27,9 @@ class OnboardingScreen extends StatelessWidget {
                   child: Text(
                     'Fall in Love with Coffee in Blissful Delight!',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontFamily: 'sora',
-                      fontSize: 32,
+                      fontSize: 32.sp,
                       fontWeight: FontWeight.w600,
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
@@ -52,10 +49,11 @@ class OnboardingScreen extends StatelessWidget {
                     fontFamily: 'sora',
                     fontWeight: FontWeight.normal,
                     color: Colors.white),
+                textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
-              height: 32,
+              height: 32.h,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -63,24 +61,23 @@ class OnboardingScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyHomePage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFC67C4E),
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(12), 
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
-                    padding:
-                        EdgeInsets.symmetric(vertical: 20.h), 
+                    padding: EdgeInsets.symmetric(vertical: 20.h),
                   ),
                   child: Text(
                     'Get Started',
                     style: TextStyle(
-                      fontFamily: 'sora', 
-                      fontWeight: FontWeight.w600, 
+                      fontFamily: 'sora',
+                      fontWeight: FontWeight.w600,
                       fontSize: 16.sp,
-                      color: Colors.white, 
+                      color: Colors.white,
                     ),
                   ),
                 ),
