@@ -21,7 +21,7 @@ class OnboardingScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
                 Positioned(
-                  bottom: -40, // half text on image, half outside
+                  bottom: -40, 
                   left: 20,
                   right: 20,
                   child: Text(

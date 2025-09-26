@@ -1,85 +1,124 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
   @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  final List<String> _categories = [
+    'All Coffee',
+    'Espresso',
+    'Latte',
+    'Flat White',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: _categories.length, vsync: this);
+    _tabController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: SafeArea(
-        child: Scaffold(
-          body: Column(
-            children: [
-              Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    height: 236.h,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomLeft,
-                        end: Alignment.topRight,
-                        colors: [
-                          Color(0xFF313131),
-                          Color(0xFF111111),
-                        ],
-                        stops: [0.0, 1.0],
-                      ),
+    const double horizontalPadding = 24.0;
+
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  height: 236.h,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [
+                        Color(0xFF313131),
+                        Color(0xFF111111),
+                      ],
+                      stops: [0.0, 1.0],
                     ),
                   ),
-                  Positioned(
-                    left: 0.0,
-                    right: 0.0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Location',
-                            style: TextStyle(
-                              fontFamily: 'sora',
-                              fontWeight: FontWeight.normal,
-                              fontSize: 12.sp,
-                              color: Color(0xFFA4A4A4),
-                            ),
-                          ),
-                          SizedBox(height: 8.h),
-                          Row(
+                ),
+                Positioned(
+                  left: 0.0,
+                  right: 0.0,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: horizontalPadding),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Bilzen, Tanjungbalai',
+                                'Location',
                                 style: TextStyle(
                                   fontFamily: 'sora',
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14.sp,
-                                  color: Color(0xFFD8D8D8),
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 12.sp,
+                                  color: const Color(0xFFA4A4A4),
                                 ),
                               ),
-                              SizedBox(width: 4.w),
-                              Icon(
-                                Icons.arrow_drop_down_circle,
-                                color: Colors.white,
-                              )
+                              SizedBox(height: 8.h),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Bilzen, Tanjungbalai',
+                                    style: TextStyle(
+                                      fontFamily: 'sora',
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14.sp,
+                                      color: const Color(0xFFD8D8D8),
+                                    ),
+                                  ),
+                                  SizedBox(width: 4.w),
+                                  const Icon(
+                                    Icons.arrow_drop_down_circle,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
                             ],
                           ),
-                          SizedBox(
-                            height: 24.h,
-                          ),
-                          Row(
-                            spacing: 16,
+                        ),
+                        SizedBox(height: 24.h),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: horizontalPadding),
+                          child: Row(
                             children: [
                               Expanded(
                                 child: Container(
                                   height: 52.0,
                                   decoration: BoxDecoration(
-                                    color: Color(0xFF2A2A2A),
+                                    color: const Color(0xFF2A2A2A),
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
-                                  child: TextField(
+                                  child: const TextField(
                                     decoration: InputDecoration(
                                       hintText: 'Search coffee',
                                       hintStyle: TextStyle(
@@ -99,97 +138,113 @@ class MyHomePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                child: Container(
-                                  padding: EdgeInsets.all(16.0),
-                                  decoration: BoxDecoration(
-                                    color: Color(0xFFC67C4E),
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  child: Icon(
-                                    Icons.slow_motion_video_outlined,
-                                    size: 20,
-                                    color: Colors.white,
-                                  ),
+                              SizedBox(width: 16.0),
+                              Container(
+                                padding: const EdgeInsets.all(16.0),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFC67C4E),
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: Image.asset(
+                                  'assets/images/filter.png',
+                                  height: 20.h,
+                                  width: 20.w,
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: 24.h,
-                          ),
-                          Image.asset(
+                        ),
+                        SizedBox(height: 24.h),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: horizontalPadding),
+                          child: Image.asset(
                             'assets/images/Banner.png',
                           ),
-                          SizedBox(
-                            height: 24.h,
-                          ),
-                          TabBar(
-                            // isScrollable: true,
-                            indicatorColor:Colors.transparent,
-                            dividerColor:Colors.transparent,
-                            labelPadding: EdgeInsets.zero,
-                            tabs: [
-                              Tab(
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 8.w, vertical: 4.h),
-                                  decoration: BoxDecoration(
-                                    color: Color(0XFFC67C4E),
-                                    borderRadius: BorderRadius.circular(6.r),
+                        ),
+                        SizedBox(height: 24.h),
+                        TabBar(
+                          isScrollable: true,
+                          controller: _tabController,
+                          indicatorColor: Colors.transparent,
+                          dividerColor: Colors.transparent,
+                          labelPadding: EdgeInsets.zero,
+                          // padding: EdgeInsets.only(left: 24),
+                          tabs: List.generate(_categories.length, (index) {
+                            final isSelected = _tabController.index == index;
+                            return Tab(
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  right: 16.0,
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0, vertical: 8.0),
+                                decoration: BoxDecoration(
+                                  color: isSelected
+                                      ? const Color(0XFFC67C4E)
+                                      : const Color(0xFFFFFFFF),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  border: isSelected
+                                      ? null
+                                      : Border.all(color: Colors.grey.shade200),
+                                ),
+                                child: Text(
+                                  _categories[index],
+                                  style: TextStyle(
+                                    fontFamily: 'sora',
+                                    fontWeight: isSelected
+                                        ? FontWeight.w600
+                                        : FontWeight.normal,
+                                    fontSize: 14,
+                                    color: isSelected
+                                        ? Colors.white
+                                        : const Color(0xFF2F2D2C),
                                   ),
-                                  child: Text(
-                                    'All Coffee',
-                                    style: TextStyle(
-                                      fontFamily: 'sora',
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                    ),
-                                  ),
+                                  softWrap: false,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                              Tab(text: 'Espresso'),
-                              Tab(text: 'Latte'),
-                              Tab(text: 'Flat White'),
-                            ],
-                          ),
-                        ],
-                      ),
+                            );
+                          }),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-              // TabBarView for tab content
-              Expanded(
+                ),
+              ],
+            ),
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: horizontalPadding),
                 child: TabBarView(
-                  children: [
+                  controller: _tabController,
+                  children: const [
                     Center(
-                        child: Text('Cappuccino',
-                            style: TextStyle(
-                                color: const Color.fromARGB(255, 0, 0, 0)))),
-                    Center(
-                        child: Text('Espresso',
-                            style: TextStyle(
-                                color: const Color.fromARGB(255, 0, 0, 0)))),
-                    Center(
-                      child: Container(
-                        width: 200.w,
-                        height: 200.w,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(16.r),
-                        ),
-                      ),
+                      child: Text('All Coffee Content',
+                          style:
+                              TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
                     ),
                     Center(
-                        child: Text('Flat White',
-                            style: TextStyle(color: Colors.white))),
+                      child: Text('Espresso Content',
+                          style:
+                              TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+                    ),
+                    Center(
+                      child: Text('Latte Content',
+                          style:
+                              TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+                    ),
+                    Center(
+                      child: Text('Flat White Content',
+                          style:
+                              TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+                    ),
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
