@@ -14,9 +14,10 @@ class _MyHomePageState extends State<MyHomePage>
 
   final List<String> _categories = [
     'All Coffee',
-    'Espresso',
+    'Machiato',
     'Latte',
-    'Flat White',
+    'Americano',
+    'classic cold'
   ];
 
   @override
@@ -164,12 +165,12 @@ class _MyHomePageState extends State<MyHomePage>
                         ),
                         SizedBox(height: 24.h),
                         TabBar(
-                          isScrollable: true,
+                          // isScrollable: true,
                           controller: _tabController,
                           indicatorColor: Colors.transparent,
                           dividerColor: Colors.transparent,
                           labelPadding: EdgeInsets.zero,
-                          // padding: EdgeInsets.only(left: 24),
+                          padding: EdgeInsets.only(left: 24),
                           tabs: List.generate(_categories.length, (index) {
                             final isSelected = _tabController.index == index;
                             return Tab(
@@ -236,6 +237,11 @@ class _MyHomePageState extends State<MyHomePage>
                               TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
                     ),
                     Center(
+                      child: Text('Flat White Content',
+                          style:
+                              TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+                    ),
+                     Center(
                       child: Text('Flat White Content',
                           style:
                               TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
