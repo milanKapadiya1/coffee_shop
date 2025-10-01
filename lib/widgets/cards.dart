@@ -19,7 +19,7 @@ class CustomCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 8, right: 8, left: 8, bottom: 12),
+      padding: const EdgeInsets.only(top: 8, right: 8, left: 8, bottom:12 ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -31,7 +31,7 @@ class CustomCards extends StatelessWidget {
         ],
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [
@@ -61,12 +61,11 @@ class CustomCards extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.6),
                     borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(12),
-                      bottomLeft: Radius.circular(8)
-                    ),
+                        topRight: Radius.circular(12),
+                        bottomLeft: Radius.circular(8)),
                   ),
                   child: Row(
-                    // mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
                         Icons.star,
@@ -79,10 +78,11 @@ class CustomCards extends StatelessWidget {
                       Text(
                         '$rating'.toString(),
                         style: TextStyle(
+                            color: Colors.white,
                             fontFamily: 'sora',
                             fontSize: 8.sp,
                             fontWeight: FontWeight.w600),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -112,7 +112,6 @@ class CustomCards extends StatelessWidget {
           SizedBox(
             height: 8.h,
           ),
-          // const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

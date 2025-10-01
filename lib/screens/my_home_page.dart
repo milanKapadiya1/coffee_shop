@@ -1,4 +1,5 @@
-import 'package:coffeeshop/widgets/cards.dart';
+import 'package:coffeeshop/widgets/coffee_details_model.dart';
+import 'package:coffeeshop/widgets/coffee_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,12 +11,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<String> _categories = [
+  final List<String> _categoriesOfCoffee = [
     'All Coffee',
     'Machiato',
     'Latte',
     'Americano',
     'classic cold'
+  ];
+
+  final List<List<Coffee>> allDataListOfCoffees = [
+    allCoffeeItems,
+    machiatoItems,
+    latteItems,
+    americanoItems,
+    coldItems,
   ];
 
   final PageController _pageController = PageController();
@@ -169,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Row(
                     children: [
                       SizedBox(width: horizontalPadding),
-                      ...List.generate(_categories.length, (index) {
+                      ...List.generate(_categoriesOfCoffee.length, (index) {
                         final isSelected = selectedIndex == index;
                         return GestureDetector(
                           onTap: () {
@@ -194,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   : Border.all(color: Colors.grey.shade200),
                             ),
                             child: Text(
-                              _categories[index],
+                              _categoriesOfCoffee[index],
                               style: TextStyle(
                                 fontFamily: 'sora',
                                 fontWeight: isSelected
@@ -219,70 +228,16 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 16.0),
             Expanded(
               child: PageView(
-                controller: _pageController,
-                onPageChanged: (index) {
-                  _selectedIndex.value = index;
-                },
-                children: [
-                  // Padding(padding: EdgeInsets.only()),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
-                    child: GridView.count(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 15,
-                      mainAxisSpacing: 24,
-                      children: [
-                      CustomCards(
-                        myImage: 'assets/images/1.png',
-                        coffeeTitle:'Caffe Mocha',
-                        typeOfCoffee: 'Deep Foam',
-                        price:r'$ 4.53',
-                        rating: 4.8,
-                      ),
-                       CustomCards(
-                        myImage: 'assets/images/2.png',
-                        coffeeTitle:'Flat White',
-                        typeOfCoffee: 'Espresso',
-                        price:r'$ 3.53',
-                        rating: 4.9,
-                      ),
-                       CustomCards(
-                        myImage: 'assets/images/3.png',
-                        coffeeTitle:'Cappuccino',
-                        typeOfCoffee: 'Milk Foam',
-                        price:r'$ 4.99',
-                        rating: 4.7,
-                      ),
-                       CustomCards(
-                        myImage: 'assets/images/4.png',
-                        coffeeTitle:'Americano',
-                        typeOfCoffee: 'Frape Example',
-                        price:r'$ 2.10',
-                        rating: 4.2,
-                      ),
-
-                      ],
-                    ),
-                    
-                    ),
-                  Center(
-                    child: Text('Machiato Content',
-                        style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
-                  ),
-                  Center(
-                    child: Text('Latte Content',
-                        style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
-                  ),
-                  Center(
-                    child: Text('Ameticano Content',
-                        style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
-                  ),
-                  Center(
-                    child: Text('classic cold Content',
-                        style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
-                  ),
-                ],
-              ),
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    _selectedIndex.value = index;
+                  },
+                  children: List.generate(_categoriesOfCoffee.length, (index) {
+                    // final currentData = allDataListOfCoffees[index];
+                    return CoffeeGrid(
+                        items: allDataListOfCoffees[index],
+                        horizontalPadding: horizontalPadding);
+                  })),
             ),
           ],
         ),
